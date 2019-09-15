@@ -1,7 +1,7 @@
 package dao;
 
 import entity.Contact;
-
+//** Обозначаем джава методы*/
 public interface ContactDao {
     Contact createContact(Contact newContact);
 
@@ -11,5 +11,5 @@ public interface ContactDao {
 
     boolean removeContact(int id);
 
-    void ShowAllContacts();
+    void showAllContacts();
 }

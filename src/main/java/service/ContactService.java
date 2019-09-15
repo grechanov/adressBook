@@ -2,14 +2,16 @@ package service;
 
 import entity.Contact;
 
+import java.util.Scanner;
+
 public interface ContactService {
-    Contact createContact();
+    Contact createContact(Scanner scanner);
 
-    Contact findById(int id);
+    Contact findById(Scanner scanner);
 
-    Contact updateContact(Contact updatedContact);
+    Contact updateContact(Scanner scanner);
 
-    boolean removeContact(int id);
+    boolean removeContact(Scanner scanner);
 
-    void ShowAllContacts();
+    void showAllContacts(Scanner scanner);
 }

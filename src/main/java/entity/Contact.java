@@ -2,8 +2,9 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-
+//** Класс в котором создается обьект Contact с полями для добавления в базу данных контактов*/
 public class Contact {
+    private int id;
     private String name;
     private String Lastname;
     private int age;
@@ -25,6 +26,13 @@ public class Contact {
         this.createDate = createDate;
         this.updateTime = updateTime;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -38,7 +46,7 @@ public class Contact {
         return Lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         Lastname = lastname;
     }
 
@@ -104,7 +112,8 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "Name = '" + name + '\'' +
+                "ID  = " + id +
+                ", Name = '" + name + '\'' +
                 ", Last name = '" + Lastname + '\'' +
                 ", Age = " + age +
                 ", Phone number = '" + phoneNumber + '\'' +

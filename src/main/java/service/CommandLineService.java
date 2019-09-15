@@ -1,61 +1,69 @@
 package service;
 
 import Exeption.ResponseCode;
-import sun.jvm.hotspot.debugger.AddressException;
+import Exeption.addressBookException;
 
 import java.util.Scanner;
 
 public interface CommandLineService {
 
-  static  void showMenu(){
-        System.out.println("Add contact;");
-        System.out.println("Update contact");
-        System.out.println("Delete contact");
-        System.out.println("Show all contacts");
-        System.out.println("Show contact by id");
-        System.out.println("Exit");
+    static void showMenu() {
+        //**  вывод с начального меню на экран*/
+        System.out.println("1. Add contact;");
+        System.out.println("2. Update contact");
+        System.out.println("3. Delete contact");
+        System.out.println("4. Show all contacts");
+        System.out.println("5. Show contact by id");
+        System.out.println("0. Exit");
     }
-    static void  run(Scanner scanner, ContactService service){
-      boolean exit = true;
-        do {...} while (exit);
-        System.out.println("Chose your wish");
-        showMenu();
-        if ( scanner.hasNextInt()) {...} else {
-            System.out.println("your enter wrong number");
-            scanner.next;
-        }
-        switch (scanner.nextInt())
-            case 1:{
-                createContact;
-        }
-        case 2:{
-            service.updateContactByld();
-        }
-        case 3:{
-            service.deleteContact;
-        }
-        case 4:{
-            service.showContacts;
-        }
-        case 5:{
-            System.out.println(service.getContact(scanner));
-            break;
-    }
-        case 0:{
-            System.out.println("Thak you thet use our app. Good by");
-            exit = false;
-            break;
 
+    static void run(Scanner scanner, ContactService service) {
+        //** Обработка меню и вызов методов из слоя Service*/
+        boolean exit = false;
+        do {
+            System.out.println("Chose your wish");
+            showMenu();
+            try {
+                if (scanner.hasNextInt()) {
+                    switch (scanner.nextInt()) {
+                        case 1: {
+                            service.createContact(scanner);
+                            break;
+                        }
+                        case 2: {
+                            service.updateContact(scanner);
+                            break;
+                        }
+                        case 3: {
+                            service.removeContact(scanner);
+                            break;
+                        }
+                        case 4: {
+                            service.showAllContacts(scanner);
+                            break;
+                        }
+                        case 5: {
+                            service.findById(scanner);
+                            break;
+                        }
+                        case 0: {
+                            System.out.println("Thank you that use our app. Good by");
+                            exit = true;
+                            break;
+                        }
+                        default: {
+                            throw new addressBookException(ResponseCode.NOT_FOUND,
+                                    "You enter wrong number");
+                        }
+                    }
+                } else {
+                    System.out.println("Need enter a number.");
+                    scanner.next();
+                }
+            } catch (addressBookException e) {
+                System.out.println(e.getCode());
+                System.out.println(e.getMessage());
+            }
+        } while (!exit);
+    }
 }
-        default:{
-            throw new AddressException(ResponseCode);
-        }
-        else{
-            System.out.println("");
-        }
-        catch (adressBookExeption e){
-            System.out.println(e. getCode());
-            System.out.println(e. getCode());
-        }
-    }
-    }
