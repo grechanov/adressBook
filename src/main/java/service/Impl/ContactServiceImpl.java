@@ -27,8 +27,19 @@ public class ContactServiceImpl implements ContactService {
         contact.setAge(scanner.nextInt());
         System.out.println("Enter phone number of contact");
         contact.setPhoneNumber(scanner.next());
-        System.out.println("Is contact married(y/n?)");
-        contact.setMarried(scanner.next().equalsIgnoreCase("y"));
+        while (true) {
+            System.out.println("Is contact married(y/n?)");
+            String str = scanner.next();
+            if (str.equalsIgnoreCase("y")) {
+                contact.setMarried(true);
+                break;
+            } else if (str.equalsIgnoreCase("n")) {
+                contact.setMarried(false);
+                break;
+            } else {
+                System.out.println("Enter only 'y' or 'n'");
+            }
+        }
         contact.setCreateDate(LocalDateTime.now());
         contact.setUpdateTime(LocalDateTime.now());
         return contactDao.createContact(contact);
@@ -132,16 +143,23 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public boolean removeContact(Scanner scanner) {
         Contact contact = findById(scanner);
-        System.out.println("If you really want to delete this contact (y/n):");
-        String str = scanner.next();
-        if (str.equalsIgnoreCase("y")) {
-            contactDao.removeContact(contact.getId());
-            System.out.println("contact delete successfully");
-            return true;
-        } else {
-            System.out.println("delete cancelled");
-            return false;
+        if (contact.getId() != 0) {
+            while (true) {
+                System.out.println("If you really want to delete this contact (y/n):");
+                String str = scanner.next();
+                if (str.equalsIgnoreCase("y")) {
+                    contactDao.removeContact(contact.getId(), scanner);
+                    System.out.println("contact delete successfully");
+                    return true;
+                } else if (str.equalsIgnoreCase("n")) {
+                    System.out.println("delete cancelled");
+                    return false;
+                } else {
+                    System.out.println("Enter only 'y' or 'n'");
+                }
+            }
         }
+        return false;
     }
 
     @Override
