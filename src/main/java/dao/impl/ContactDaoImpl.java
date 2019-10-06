@@ -4,8 +4,6 @@ import dao.ContactDao;
 import entity.Contact;
 
 import java.util.*;
-
-//** описываем джава методы и сетим их*/
 public class ContactDaoImpl implements ContactDao {
 
     private static int generator = 0;

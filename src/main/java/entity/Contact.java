@@ -2,7 +2,6 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-//** Класс в котором создается обьект Contact с полями для добавления в базу данных контактов*/
 public class Contact {
     private int id;
     private String name;

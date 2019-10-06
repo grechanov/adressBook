@@ -1,7 +1,7 @@
 package service;
 
 import Exeption.ResponseCode;
-import Exeption.addressBookException;
+import Exeption.AddressBookException;
 
 import java.util.Scanner;
 
@@ -52,7 +52,7 @@ public interface CommandLineService {
                             break;
                         }
                         default: {
-                            throw new addressBookException(ResponseCode.NOT_FOUND,
+                            throw new AddressBookException(ResponseCode.NOT_FOUND,
                                     "You enter wrong number");
                         }
                     }
@@ -60,7 +60,7 @@ public interface CommandLineService {
                     System.out.println("Need enter a number.");
                     scanner.next();
                 }
-            } catch (addressBookException e) {
+            } catch (AddressBookException e) {
                 System.out.println(e.getCode());
                 System.out.println(e.getMessage());
             }
